@@ -1,0 +1,11 @@
+.container-navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.container-logo-navbar {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

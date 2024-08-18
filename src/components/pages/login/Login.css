@@ -1,0 +1,92 @@
+.container-login {
+    width: 90%;
+    max-width: 400px;
+    min-height: 20rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 0 3px 1px rgb(129, 131, 143);
+}
+
+.logo-login img {
+    width: 60%;
+}
+
+.container-input-login {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-login {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.input-login img {
+    width: 10%;
+    min-width: 24px;
+}
+
+.input-login input {
+    width: 80%;
+    background: none;
+    padding: 0.4rem;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.olvide-pass {
+    width: 100%;
+    text-align: right;
+}
+
+.olvide-pass a {
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+.container-iniciar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container-iniciar button {
+    width: 80%;
+    min-height: 3rem;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: black;
+    color: white;
+}
+
+.container-iniciar button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 2px 1px black;
+}
+
+@media (min-width: 768px) {
+    .container-login {
+        width: 50%;
+    }
+
+    .container-iniciar button {
+        width: 60%;
+    }
+}
