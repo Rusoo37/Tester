@@ -20,11 +20,13 @@ const Admin = ({
             const tipoCoincide =
                 filtroTipo === "Todos" || venta.tipo === filtroTipo;
 
+            const fecha = new Date(venta.fecha.seconds * 1000);
+            fecha.setHours(fecha.getHours() - 3);
+            const fechaAjustada = fecha.toISOString().split("T")[0];
+
+            // Comparación con la fecha seleccionada
             const fechaCoincide =
-                !fechaSeleccionada ||
-                new Date(venta.fecha.seconds * 1000)
-                    .toISOString()
-                    .split("T")[0] === fechaSeleccionada;
+                !fechaSeleccionada || fechaAjustada === fechaSeleccionada;
 
             const empleadoCoincide =
                 filtroEmpleado === "Todos" || venta.empleado === filtroEmpleado;

@@ -9,7 +9,9 @@ const AdminContainer = ({ logOut }) => {
     const [ventas, setVentas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [ventasPorDia, setVentasPorDia] = useState([]);
-    const hoy = new Date().toISOString().split("T")[0];
+    const hoy = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .split("T")[0];
     const [fechaSeleccionada, setFechaSeleccionada] = useState(hoy);
 
     const fetchVentas = async () => {
@@ -42,20 +44,24 @@ const AdminContainer = ({ logOut }) => {
         const calcularTotales = () => {
             const totales = ventas.reduce((acc, venta) => {
                 if (venta.fecha && venta.fecha.seconds) {
-                    const fecha = new Date(venta.fecha.seconds * 1000)
-                        .toISOString()
-                        .split("T")[0];
+                    const fecha = new Date(venta.fecha.seconds * 1000);
+                    fecha.setHours(fecha.getHours() - 3);
 
-                    if (fechaSeleccionada && fecha !== fechaSeleccionada) {
+                    const fechaAjustada = fecha.toISOString().split("T")[0];
+
+                    if (
+                        fechaSeleccionada &&
+                        fechaAjustada !== fechaSeleccionada
+                    ) {
                         return acc;
                     }
 
-                    if (!acc[fecha]) {
-                        acc[fecha] = { totalMonto: 0, cantidad: 0 };
+                    if (!acc[fechaAjustada]) {
+                        acc[fechaAjustada] = { totalMonto: 0, cantidad: 0 };
                     }
 
-                    acc[fecha].totalMonto += parseFloat(venta.monto);
-                    acc[fecha].cantidad += 1;
+                    acc[fechaAjustada].totalMonto += parseFloat(venta.monto);
+                    acc[fechaAjustada].cantidad += 1;
                 }
                 return acc;
             }, {});
@@ -65,6 +71,7 @@ const AdminContainer = ({ logOut }) => {
                 totalMonto: totales[fecha].totalMonto.toFixed(2),
                 cantidad: totales[fecha].cantidad,
             }));
+
             setVentasPorDia(result);
         };
 
