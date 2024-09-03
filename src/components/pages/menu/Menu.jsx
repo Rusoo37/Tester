@@ -1,5 +1,8 @@
 import "./Menu.css";
 import logo from "./../../../../assets/logo.webp";
+import UltimaVenta from "../../common/ultimaVenta/UltimaVenta";
+import { useRef } from "react";
+import LogOut from "../../common/logOut/LogOut";
 
 const Menu = ({
     monto,
@@ -13,13 +16,22 @@ const Menu = ({
     logOut,
     confirmarGuardar,
     cerrarModalConfirmacion,
-    isSubmitting,
+    isLoading,
+    abrirModal,
+    ultimaVenta,
 }) => {
+    const confirmButtonRef = useRef(null);
+
+    const handleKeyDown = (e) => {
+        if (abrirModal) {
+            if (e.key === "Enter") {
+                confirmButtonRef.current.click();
+            }
+        }
+    };
     return (
-        <div className="container-menu">
-            <button onClick={logOut} className="btn-cerrar-sesion">
-                Cerrar sesión
-            </button>
+        <div className="container-menu" onKeyDown={handleKeyDown}>
+            <LogOut logOut={logOut} />
             <form onSubmit={handleSubmit} className="form-agregar-venta">
                 <div className="logo-login">
                     <img src={logo} alt="logo" />
@@ -62,36 +74,45 @@ const Menu = ({
                 <button
                     type="submit"
                     className="btn-submit"
-                    disabled={isSubmitting}
+                    disabled={isLoading}
                 >
-                    {isSubmitting ? "Guardando..." : "Añadir venta"}{" "}
+                    {isLoading ? "Guardando..." : "Añadir venta"}{" "}
                 </button>
             </form>
 
             {/* Modal de confirmación */}
-            <div id="confirm-save" className="modal">
+            <div
+                id="confirm-save"
+                className={`modal ${abrirModal ? "modal-show" : ""}`}
+            >
                 <div className="modal-content">
                     <p>¿Estás seguro de que deseas guardar esta venta?</p>
                     <div className="modal-buttons">
                         <button
                             onClick={confirmarGuardar}
+                            ref={confirmButtonRef}
                             id="confirm-yes"
-                            className="btn-confirm-yes"
-                            disabled={isSubmitting}
+                            className={`btn-confirm-yes ${
+                                abrirModal ? "btn-animacion" : ""
+                            }`}
+                            disabled={isLoading}
                         >
                             Sí
                         </button>
+
                         <button
                             onClick={cerrarModalConfirmacion}
                             id="confirm-no"
                             className="btn-confirm-no"
-                            disabled={isSubmitting}
+                            disabled={isLoading}
                         >
                             No
                         </button>
                     </div>
                 </div>
             </div>
+            {/* Mostrar información de la última venta */}
+            <UltimaVenta ultimaVenta={ultimaVenta} />
         </div>
     );
 };

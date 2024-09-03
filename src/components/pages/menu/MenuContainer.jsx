@@ -10,7 +10,9 @@ const MenuContainer = ({ logOut, user }) => {
     const [empleado, setEmpleado] = useState("");
     const empleados = ["Nicolás", "Agustín", "Marcos"];
     const [ventaAConfirmar, setVentaAConfirmar] = useState(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [abrirModal, setAbrirModal] = useState(false);
+    const [ultimaVenta, setUltimaVenta] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,12 +32,13 @@ const MenuContainer = ({ logOut, user }) => {
         }
 
         setVentaAConfirmar({ monto, tipo, empleado });
+        setAbrirModal(true);
         document.getElementById("confirm-save").style.display = "flex";
     };
 
     const confirmarGuardar = async () => {
-        setIsSubmitting(true);
         if (ventaAConfirmar) {
+            setIsLoading(true);
             try {
                 await addDoc(collection(db, "ventas"), {
                     monto: ventaAConfirmar.monto,
@@ -44,6 +47,12 @@ const MenuContainer = ({ logOut, user }) => {
                     fecha: new Date(),
                 });
                 notifyExitoso("Venta guardada con éxito");
+                setUltimaVenta({
+                    monto: ventaAConfirmar.monto,
+                    tipo: ventaAConfirmar.tipo,
+                    empleado: ventaAConfirmar.empleado,
+                    fecha: new Date(),
+                });
                 setMonto("");
                 setEmpleado("");
             } catch (e) {
@@ -51,7 +60,6 @@ const MenuContainer = ({ logOut, user }) => {
                 console.error("Error guardando la venta: ", e);
             } finally {
                 cerrarModalConfirmacion();
-                setIsSubmitting(false);
             }
         }
     };
@@ -59,8 +67,10 @@ const MenuContainer = ({ logOut, user }) => {
     const cerrarModalConfirmacion = () => {
         setVentaAConfirmar(null);
         document.getElementById("confirm-save").style.display = "none";
-        setIsSubmitting(false);
+        setIsLoading(false);
+        setAbrirModal(false);
     };
+
     return (
         <Menu
             monto={monto}
@@ -74,7 +84,9 @@ const MenuContainer = ({ logOut, user }) => {
             logOut={logOut}
             confirmarGuardar={confirmarGuardar}
             cerrarModalConfirmacion={cerrarModalConfirmacion}
-            isSubmitting={isSubmitting}
+            isLoading={isLoading}
+            abrirModal={abrirModal}
+            ultimaVenta={ultimaVenta}
         />
     );
 };

@@ -91,7 +91,7 @@
 
 /* Botón para eliminar venta */
 .btn-eliminar-venta {
-    background-color: #ff4d4d;
+    background-color: #ff4d4d; /* Color rojo para indicar eliminación */
     color: white;
     border: none;
     padding: 8px 16px;
@@ -99,26 +99,11 @@
     font-size: 14px;
     border-radius: 5px;
     margin: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .btn-eliminar-venta:hover {
-    background-color: #e60000;
-}
-
-/* Botón para eliminar todas las ventas */
-.btn-eliminar-todas {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-.btn-eliminar-todas:hover {
-    background-color: #e60000;
+    background-color: #e60000; /* Un tono más oscuro de rojo al pasar el ratón */
 }
 
 /* Estilo para los filtros */

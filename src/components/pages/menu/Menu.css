@@ -8,22 +8,6 @@
     padding: 1rem; /* Para dar espacio en pantallas pequeñas */
 }
 
-.btn-cerrar-sesion {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.4rem;
-    background-color: black;
-    color: white;
-}
-
-.btn-cerrar-sesion:hover {
-    cursor: pointer;
-    box-shadow: 0 0 3px 1px black;
-}
-
 .form-agregar-venta {
     width: 90%;
     max-width: 500px;
@@ -74,13 +58,36 @@
     font-size: 1.1rem;
     border: none;
     border-radius: 1rem;
-    background-color: black;
+    background-color: #4caf50;
     color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-submit:hover {
     cursor: pointer;
-    box-shadow: 0 0 2px 1px black;
+    background-color: #45a049; /* Azul más oscuro al pasar el cursor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para dar efecto de elevación */
+    transform: translateY(-2px); /* Efecto de elevación al pasar el cursor */
+}
+
+.btn-submit:active {
+    background-color: #004494; /* Azul aún más oscuro al hacer clic */
+    transform: translateY(0); /* Restablecer elevación al hacer clic */
+}
+@keyframes pulsar {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn-submit {
+    animation: pulsar 2s infinite; /* Añade un efecto pulsante suave */
 }
 
 /* Media queries para pantallas pequeñas */
@@ -136,8 +143,13 @@
     justify-content: center;
     align-items: center;
 }
+.modal-show {
+    display: flex; /* O utiliza display: block; si prefieres */
+}
 
 .modal-content {
+    width: 90%;
+    max-width: 400px; /* Limita el tamaño máximo en pantallas grandes */
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;

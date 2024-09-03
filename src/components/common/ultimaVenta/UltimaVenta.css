@@ -1,0 +1,54 @@
+/* UltimaVenta.css */
+.container-ultima-venta {
+    width: 50%;
+    margin: 20px auto;
+    padding: 1.5rem;
+    background-color: white;
+    box-shadow: 0 0 3px 1px black;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 25%;
+    top: 0rem;
+    gap: 1rem;
+}
+
+.detalle-venta {
+    display: flex;
+    gap: 1rem;
+}
+
+.detalle-venta p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .container-ultima-venta {
+        width: 80%; /* Aumenta el ancho para ocupar más espacio en pantallas pequeñas */
+        left: 10%; /* Centra el contenedor horizontalmente */
+        padding: 1rem; /* Ajusta el padding para pantallas pequeñas */
+        top: 2.5rem; /* Ajusta la posición desde el top para pantallas pequeñas */
+    }
+    .detalle-venta {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-ultima-venta {
+        width: 90%; /* Ocupa casi todo el ancho en móviles */
+        left: 5%; /* Ajusta el margen izquierdo */
+        top: 2.5rem; /* Más espacio desde la parte superior */
+    }
+
+    .detalle-venta p {
+        font-size: 1rem; /* Reduce el tamaño de fuente para móviles */
+    }
+
+    h2 {
+        font-size: 1.2rem; /* Ajusta el tamaño del título en móviles */
+    }
+}

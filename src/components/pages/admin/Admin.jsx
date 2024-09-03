@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Admin.css";
+import LogOut from "../../common/logOut/LogOut";
 
 const Admin = ({
     logOut,
@@ -68,9 +69,7 @@ const Admin = ({
     };
     return (
         <div className="container-dashboard">
-            <button onClick={logOut} className="btn-cerrar-sesion">
-                Cerrar sesión
-            </button>
+            <LogOut logOut={logOut} />
             <div className="dashboard">
                 <h2>Listado de Ventas</h2>
 
